@@ -368,6 +368,7 @@ export interface ApiAddressAddress extends Schema.CollectionType {
     singularName: 'address';
     pluralName: 'addresses';
     displayName: 'address';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -375,6 +376,11 @@ export interface ApiAddressAddress extends Schema.CollectionType {
   attributes: {
     country: Attribute.String;
     province: Attribute.String;
+    product: Attribute.Relation<
+      'api::address.address',
+      'oneToOne',
+      'api::product.product'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -406,6 +412,11 @@ export interface ApiProductProduct extends Schema.CollectionType {
   attributes: {
     name: Attribute.String;
     price: Attribute.Decimal;
+    address: Attribute.Relation<
+      'api::product.product',
+      'oneToOne',
+      'api::address.address'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
